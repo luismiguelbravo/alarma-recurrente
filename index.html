@@ -13,6 +13,13 @@
                 width: 200px;
                 text-align: center;
             }
+            .receptor-de-tecla {
+                font-size: 2em;
+                width: 600px;
+                text-align: center;
+                color: green;
+                background-color: black;
+            }
         </style>
     </head>
   <body>
@@ -20,7 +27,7 @@
 
     <table style="margin: 0 auto;">
         <tr>
-            <td><input type="number" name="setTime" id="setTime" class="tipo-numero" value="240"></td>
+            <td><input type="number" name="setTime" id="setTime" class="tipo-numero" value="24"></td>
             <td style="background-color: #CCC">
                 Timepo restante
             </td>
@@ -30,7 +37,7 @@
         </tr>      
         <tr>
             <td>
-                <input type="number" name="setRepeticiones" id="setRepeticiones" class="tipo-numero" value="10" >
+                <input type="number" name="setRepeticiones" id="setRepeticiones" class="tipo-numero" value="1" >
             </td>
             <td style="background-color: #CCC">
                 Repeteciones
@@ -48,6 +55,17 @@
             </td>
             <td>
                 <button class="tipo-numero" onclick="javascript:pausarLaVaina()">pause</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: center;">
+                <input 
+                    type="text"
+                    name="receptorDeTecla"
+                    id="receptorDeTecla"
+                    class="receptor-de-tecla"
+                    onkeypress="handleKeyPress(event)"
+                    value="esperando...">
             </td>
         </tr>
     </table>
@@ -99,7 +117,7 @@
             console.log("");
             contador = parseInt(document.getElementById("textContador").value) + parseInt(document.getElementById("setRepeticiones").value);
             regresorInminente = parseInt(document.getElementById("setTime").value);
-            document.getElementById("textContador").value = contador;   
+            document.getElementById("textContador").value = contador;
         }
 
         function acercamientoInminente()
@@ -124,6 +142,18 @@
             xmlHttp.send( null );
             console.log(xmlHttp.responseText);
             return xmlHttp.responseText;
+        }
+
+        function handleKeyPress(e){
+            var key=e.keyCode || e.which;
+            if (key==13){
+                console.log("+R");
+                aumentarContador();
+                console.log("+play");
+                darlePlay();
+                console.log("contador en el imput text");
+                document.getElementById("receptorDeTecla").value = contador;
+            }
         }
 
     </script>
